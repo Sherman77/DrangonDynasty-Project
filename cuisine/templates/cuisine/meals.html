@@ -1,0 +1,19 @@
+{% extends 'cuisine/base.html' %}
+{% block 'body' %}
+<div class="container">
+  <h1>Order Meals</h1>
+  <h2>{{ note }}</h2>
+
+  <form action="{% url 'meals' %}" method='post'>
+    {% csrf_token %}
+    {{ formset.management_form }}
+
+    {% for form in formset %}
+    {{ form}}
+    <br><br>
+    {% endfor %}
+    <input type="submit" value="Make your orders">
+
+  </from>
+</div>
+{% endblock %}

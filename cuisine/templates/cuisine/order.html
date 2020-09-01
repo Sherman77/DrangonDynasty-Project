@@ -1,0 +1,33 @@
+{% extends 'cuisine/base.html' %}
+{% block 'body' %}
+{% load widget_tweaks %}
+
+  <div class="container">
+
+    <h1>Make a order</h1>
+    <h2>{{ note }}</h2>
+    {% if created_meal_pk %}
+    <a href="{% url 'editOrder' created_meal_pk %}">Edit Your Order</a>
+    {% endif %}
+
+    <form action="{% url 'order' %}" method="post">
+      {% csrf_token %}
+      {% for field in orderForm %}
+      <div class="form-group">
+      {{ field.errors}}
+      {{ field.label_tag }}
+      {% render_field field class="form-control" %}
+      </div>
+      {% endfor %}
+      <input type="submit" value="Order">
+    </form>
+    <br><br>
+    Want more than one meal?
+
+    <form action="{% url 'meals' %}" method="get">
+      {{ multiple_meal }}
+      <input type="submit" value="Order More Meals">
+    </form>
+
+  </div>
+{% endblock %}

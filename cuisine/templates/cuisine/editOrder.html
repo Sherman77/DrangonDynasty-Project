@@ -1,0 +1,13 @@
+{% extends 'cuisine/base.html' %}
+{% block 'body' %}
+<div class="container">
+  <h1>Edit Your Order</h1>
+  <h2>{{ note }}</h2>
+
+  <form action="{% url 'editOrder' order.id %}" method="post">
+    {% csrf_token %}
+    {{ orderForm }}
+    <input type="submit" value="Edit">
+  </form>
+</div>
+{% endblock %}
